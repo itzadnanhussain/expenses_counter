@@ -61,6 +61,12 @@
        </script>
 
        <script src="<?php echo ADMIN_ASSETS; ?>js/light-gallery.js"></script>
+       <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+       <script>
+           $(function() {
+               $("#datepicker").datepicker();
+           });
+       </script>
 
        <!-- End custom js for this page-->
        </body>

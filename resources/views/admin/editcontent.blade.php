@@ -14,7 +14,7 @@
                     </div>
 
                     <form class="editor-form"
-                        action="<?php echo SERVER_ROOT_PATH.'admin/update_content_process' ?>"
+                        action="<?php echo SERVER_ROOT_PATH.'admin/update_expense_process' ?>"
                         enctype="multipart/form-data">
                         <input type="hidden" name="cms_id"
                             value="<?php echo $cms[0]->cms_id; ?>">

@@ -251,15 +251,15 @@ function password_info() {
 }
 
 
-///delete_user
-function delete_user(id) {
+///delete_expense 
+function delete_expense (id) {
     if (confirm('Are you sure you want to delete this record?')) {
         $.ajax({
             type: 'POST',
-            url: 'delete_user_process',
+            url: 'delete_expense_process',
             data:
             {
-                'id': id,
+                'exp_id': id,
 
             },
             dataType: 'html',
@@ -292,208 +292,9 @@ function delete_user(id) {
 }
 
 
-///delete_category
-function delete_category(id) {
-    if (confirm('Are you sure you want to delete this record?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'delete_category_process',
-            data:
-            {
-                'id': id,
+ 
 
-            },
-            dataType: 'html',
-            success: function (data) {
-                let res = JSON.parse(data);
-                switch (res.code) {
-                    case 'success':
-                        alert(res.message);
-                        // $('#show').trigger('click');
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 500)
-
-                        break;
-
-                    case 'warning':
-                        alert(res.message);
-                        // setTimeout(function () {
-
-                        // }, 2500)
-                        break;
-
-
-
-                }
-            },
-        });
-
-    }
-}
-
-
-///delete_email_temp
-function delete_email_temp(id) {
-    if (confirm('Are you sure you want to delete this record?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'delete_email_temp_process',
-            data:
-            {
-                'id': id,
-
-            },
-            dataType: 'html',
-            success: function (data) {
-                let res = JSON.parse(data);
-                switch (res.code) {
-                    case 'success':
-                        alert(res.message);
-                        // $('#show').trigger('click');
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 500)
-
-                        break;
-
-                    case 'warning':
-                        alert(res.message);
-                        // setTimeout(function () {
-
-                        // }, 2500)
-                        break;
-
-
-
-                }
-            },
-        });
-
-    }
-}
-
-///delete_review
-function delete_review(id) {
-    if (confirm('Are you sure you want to delete this record?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'delete_review_process',
-            data:
-            {
-                'id': id,
-
-            },
-            dataType: 'html',
-            success: function (data) {
-                let res = JSON.parse(data);
-                switch (res.code) {
-                    case 'success':
-                        alert(res.message);
-                        // $('#show').trigger('click');
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 500)
-
-                        break;
-
-                    case 'warning':
-                        alert(res.message);
-                        // setTimeout(function () {
-
-                        // }, 2500)
-                        break;
-
-
-
-                }
-            },
-        });
-
-    }
-}
-
-
-///delete_property
-function delete_property(id) {
-    if (confirm('Are you sure you want to delete this record?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'delete_property_process',
-            data:
-            {
-                'id': id,
-
-            },
-            dataType: 'html',
-            success: function (data) {
-                let res = JSON.parse(data);
-                switch (res.code) {
-                    case 'success':
-                        alert(res.message);
-                        // $('#show').trigger('click');
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 500)
-
-                        break;
-
-                    case 'warning':
-                        alert(res.message);
-                        // setTimeout(function () {
-
-                        // }, 2500)
-                        break;
-
-
-
-                }
-            },
-        });
-
-    }
-}
-
-
-///show_review_detail
-function show_review_detail(id) { 
-        $.ajax({
-            type: 'POST',
-            url: 'get_review_detail_by_id',
-            data:
-            {
-                'review_id': id,
-
-            },
-            dataType: 'html',
-            success: function (data) {
-                let res = JSON.parse(data);
-                switch (res.code) {
-                    case 'success':
-                        $('#review-detail').modal('show');
-                        $('#message-text').text(res.message['review_description'])
-                        // $('#show').trigger('click');
-                        // setTimeout(function () {
-                        //     window.location.reload();
-                        // }, 500)
-
-                        break;
-
-                    case 'warning':
-                        alert(res.message);
-                        // setTimeout(function () {
-
-                        // }, 2500)
-                        break;
-
-
-
-                }
-            },
-        });
-
-    
-}
+ 
 
 ///
 $('.img-wrap .close').on('click', function() {

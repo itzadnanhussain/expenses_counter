@@ -37,6 +37,8 @@
     <!-- endinject -->
     <link rel="shortcut icon"
         href="<?php echo ADMIN_ASSETS; ?>images/favicon.png" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
 </head>
 
 <body class="sidebar-fixed">
@@ -49,13 +51,13 @@
                     <!-- <img
                         src="<?php echo ADMIN_ASSETS; ?>images/logo.svg"
                     alt="logo" /> -->
-                    <h3 class="logo-title">RENTAL APP</h3>
+                    <h3 class="logo-title">EXPENSES APP</h3>
                 </a>
                 <a class="navbar-brand brand-logo-mini"
                     href="<?php echo SERVER_ROOT_PATH; ?>admin/dashboard">
                     <!-- <img src="<?php echo ADMIN_ASSETS; ?>images/logo-mini.svg"
                     alt="logo" /> -->
-                    <h3 class="logo-title">R</h3>
+                    <h3 class="logo-title">Ex</h3>
                 </a>
                 <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="mdi mdi-menu"></span>
@@ -179,83 +181,18 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item" id="user">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/users_list' ?>">
-                            <!-- <i class="mdi mdi-account-multiple menu-icon"></i> -->
-                            <i class="fa fa-users menu-icon"></i>
-                            <span class="menu-title">Users</span>
-                        </a>
-                    </li>
+
                     <li class="nav-item" id="content">
                         <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/content_list' ?>">
+                            href="<?php echo SERVER_ROOT_PATH.'admin/expense_list' ?>">
                             <i class="fa fa-tasks menu-icon"></i>
-                            <span class="menu-title">Content</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="payment">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/payment_list' ?>">
-                            <i class="fa fa-credit-card menu-icon"></i>
-                            <span class="menu-title">Payment</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="category">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/category_list' ?>">
-                            <i class="fa fa-paw menu-icon"></i>
-                            <span class="menu-title">Category</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="property">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/property_list' ?>">
-                            <i class="fa fa-building menu-icon"></i>
-                            <span class="menu-title">Property</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="booking">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/booking_list' ?>">
-                            <i class="fa fa-home menu-icon"></i>
-                            <span class="menu-title">Booking</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="review">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/review_list' ?>">
-                            <i class="fa fa-star menu-icon"></i>
-                            <span class="menu-title">Reviews</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="email">
-                        <a class="nav-link"
-                            href="<?php echo SERVER_ROOT_PATH.'admin/email_temp_list' ?>">
-                            <i class="fa fa-envelope menu-icon"></i>
-                            <span class="menu-title">Email</span>
+                            <span class="menu-title">Expenses</span>
                         </a>
                     </li>
 
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="mdi mdi-view-array menu-icon"></i>
-                            <span class="menu-title">UI Elements</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/accordions.html">Accordions</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/badges.html">Badges</a></li>
 
-                            </ul>
-                        </div>
-                    </li> -->
+
+
 
                 </ul>
             </nav>

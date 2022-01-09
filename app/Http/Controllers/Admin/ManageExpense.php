@@ -11,39 +11,40 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
 
-class ManageContent extends Controller
+class ManageExpense extends Controller
 {
 
-    ///load_content_list
-    public function load_content_list()
+    ///load_expense_list
+    public function load_expense_list()
     {
         $data = array();
         ///common  lines
         $data['title'] = GetTitle();
-        $data['cms_list'] = GetByWhereRecord('ad_cms');
-        return view('admin.contentlist', $data);
+        $data['expense_list'] = GetByWhereRecord('expenses');
+        return view('admin.expenselist', $data);
     }
 
 
-    ///add_content
-    public function add_content()
+    ///add_expense
+    public function add_expense()
     {
         $data = array();
         ///common  lines
         $data['title'] = GetTitle();
-        return view('admin.addcontent', $data);
+        return view('admin.addexpense', $data);
     }
 
-    ///add_content_process
-    public function add_content_process(Request $request)
+    ///add_expense_process
+    public function add_expense_process(Request $request)
     {
          
         ///check form validation
         $validation = Validator::make($request->all(), [
-            'page_name' => 'required',
+            'exp_type_id' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
             'content' => 'required',
-            'filenames' => 'required',
-            'filenames.*' => 'image'
+            
        ]);
 
         ///validation errors
@@ -59,54 +60,45 @@ class ManageContent extends Controller
             die;
         } else {
             extract($request->all());
-            ///handle editor images and content
-            $content = $request->content;
+            
+            ///handle editor images and expense
+            $expense = $request->content;
             $dom = new \DomDocument();
-            $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $dom->loadHtml($expense, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $imageFile = $dom->getElementsByTagName('img');
             foreach ($imageFile as $item => $image) {
                 $data = $image->getAttribute('src');
                 list($type, $data) = explode(';', $data);
                 list(, $data)      = explode(',', $data);
                 $imgeData = base64_decode($data);
-                $image_name= "/admin/images/cms/".$page_name.'/' . time().$item.'.png';
+                $image_name= "/admin/images/expense/".$exp_type_id.'/' . time().$item.'.png';
                 $path = public_path() . $image_name;
                 file_put_contents($path, $imgeData);
           
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $image_name);
             }
-            $content = $dom->saveHTML();
+            $expense = $dom->saveHTML();
 
             ///post data to database
             $postData = array();
-            $postData['page_name'] = $page_name;
-            $postData['content'] = $content;
+            $postData['exp_type_id'] = $exp_type_id;
+            $postData['date'] = $date;
+            $postData['amount'] = $amount;
+            $postData['description'] = $expense;
 
-            $cms_id = AddNewRecord('ad_cms', $postData);
-            if ($cms_id) {
-                ///handle multiple images
-                $files = [];
-                if ($request->hasfile('filenames')) {
-                    foreach ($request->file('filenames') as $file) {
-                        $name = time().rand(1, 100).'.'.$file->extension();
-                        $file_path = 'admin/images/cms/'.$page_name;
-                        $file->move(public_path($file_path), $name);
-                        $file_path = 'admin/images/cms/'.$page_name.'/'.$name;
-                        // $files[] = $name;
-                        AddNewRecord('ad_cms_banners', array('cms_id' => $cms_id,'banner' => $file_path));
-                    }
-                }
-                $url = SERVER_ROOT_PATH.'admin/content_list';
-                $data = array('code' => 'success_url', 'message' => 'New CMS Has Been Added!','redirect_url'=> $url);
+            $exp_id = AddNewRecord('expenses', $postData);
+            if ($exp_id) {
+                $url = SERVER_ROOT_PATH.'admin/expense_list';
+                $data = array('code' => 'success_url', 'message' => 'expense Has Been Updated!','redirect_url'=> $url);
                 echo json_encode($data);
                 die;
             }
         }
     }
  
-    ///edit_content
-    public function edit_content($id)
+    ///edit_expense
+    public function edit_expense($id)
     {
         $data = array();
         ///common  lines
@@ -115,12 +107,12 @@ class ManageContent extends Controller
         $data['cms_banners'] = GetByWhereRecord('ad_cms_banners', array('cms_id'=> $id));
         
          
-        return view('admin.editcontent', $data);
+        return view('admin.editexpense', $data);
     }
     
  
-    ///update_content_process
-    public function update_content_process(Request $request)
+    ///update_expense_process
+    public function update_expense_process(Request $request)
     {
         ///check form validation
         $validation = Validator::make($request->all(), [
@@ -143,8 +135,8 @@ class ManageContent extends Controller
             $postData['cat_name'] = ucfirst($request->cat_name);
             $is_updated = UpdateRecord('ad_cms', array('cms_id'=>$request->cms_id), $postData);
             if ($is_updated) {
-                $url = SERVER_ROOT_PATH.'admin/content_list';
-                $data = array('code' => 'success_url', 'message' => 'content Has Been Updated!','redirect_url'=> $url);
+                $url = SERVER_ROOT_PATH.'admin/expense_list';
+                $data = array('code' => 'success_url', 'message' => 'expense Has Been Updated!','redirect_url'=> $url);
                 echo json_encode($data);
                 die;
             }
@@ -152,12 +144,12 @@ class ManageContent extends Controller
     }
  
  
-    ///delete_content_process
-    public function delete_content_process(Request $request)
+    ///delete_expense_process
+    public function delete_expense_process(Request $request)
     {
         extract($request->all());
-        $where = array('cms_id'=>$id);
-        $is_deleted = DeleteRecord('ad_cms', $where);
+        $where = array('exp_id'=>$exp_id);
+        $is_deleted = DeleteRecord('expenses', $where);
         if ($is_deleted) {
             $data = array('code' => 'success', 'message' => 'Record deleted!');
             echo json_encode($data);

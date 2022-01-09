@@ -124,11 +124,25 @@ if (!function_exists('base_url')) {
 
 ///UserFullName
 if (!function_exists('GetUserFullName')) {
-    function GetUserFullName($user_id)
+    function GetExpenseName($exp_type_id)
     {
-        $rec = GetByWhereRecord('tbl_users', array('user_id' =>$user_id));
-        $full_name = $rec[0]->first_name.' '.$rec[0]->last_name;
-        return $full_name;
+        $rec = GetByWhereRecord('expense_types', array('exp_type_id' =>$exp_type_id));
+        return $rec[0]->exp_name;
+    }
+}
+
+///GetExpensesList
+if (!function_exists('GetExpensesList')) {
+    function GetExpensesList()
+    {
+        $rec = GetByWhereRecord('expense_types');
+        $html='';
+        if ($rec) {
+            foreach ($rec as $key => $value) {
+                $html.="<option value=".$value->exp_type_id.">".$value->exp_name."</option>";
+            }
+        }
+        return $html;
     }
 }
 

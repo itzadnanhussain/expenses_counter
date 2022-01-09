@@ -5,7 +5,7 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add Email Template Details</h4>
+                    <h4 class="card-title">Add Page Content</h4>
                     <!-- success message -->
                     <div class="alert alert-success" id="alert-success" style="display: none;" role="alert"></div>
                     <!-- warning message -->
@@ -14,29 +14,33 @@
                     </div>
 
                     <form class="editor-form"
-                        action="<?php echo SERVER_ROOT_PATH.'admin/add_email_temp_process' ?>"
+                        action="<?php echo SERVER_ROOT_PATH.'admin/add_expense_process' ?>"
                         enctype="multipart/form-data">
 
                         <div class="form-group">
-                            <label>Email Template Name</label>
-                            <input type="text" name="etemp_name" class="form-control">
+                            <label for="exampleSelectGender">Select Expense Type</label>
+                            <select class="form-control" name="exp_type_id" id="exampleSelectGender">
+                                <?php echo GetExpensesList(); ?>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Subject Name</label>
-                            <input type="text" name="etemp_subject" class="form-control">
-                        </div>
+                            <label for="">Add Date</label>
+                            <input type="text" id="datepicker" name="date" class="form-control"
+                                placeholder="Select Date">
 
-                        <!-- Template add here -->
+                        </div>
                         <div class="form-group">
-                            <label for="">Message</label>
+                            <label for="">Add Amount</label>
+                            <input type="number" name="amount" min=0 class="form-control" placeholder="0">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleTextarea1">Description</label>
                             <textarea class="form-control summernote" rows="4"></textarea>
-
-
                         </div>
 
                         <input type="submit" class="btn btn-primary mr-2" value="Submit">
-                        <a href="<?php echo SERVER_ROOT_PATH.'admin/email_temp_list' ?>"
-                            class="btn btn-light">Cancel</a>
+                        <button class="btn btn-light">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -45,9 +49,6 @@
 </div>
 
 @include('admin.footer')
-<!-- remove active class from nav -->
 <script>
-    $(window).on('load', function() {
-        $('.nav-item').removeClass('active');
-    });
+
 </script>
