@@ -1,5 +1,6 @@
 @include('admin.header')
 
+
 <div class="content-wrapper">
     <div class="row">
         <div class="col-12">
@@ -36,7 +37,8 @@
                                             </td>
                                             <td><?php echo GetExpenseName($expense->exp_type_id) ?>
                                             </td>
-                                            <td><?php echo $expense->description ?>
+                                            <td>
+                                                <?php echo $expense->description ?>
                                             </td>
                                             <td><?php echo $expense->amount ?>
                                             </td>

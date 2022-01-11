@@ -88,3 +88,13 @@ if (!function_exists('EnableQueryLog')) {
         DB::enableQueryLog();
     }
 }
+
+
+///GetSumOfTable
+if (!function_exists('GetSumOfTable')) {
+    function GetSumOfTable($table = null, $column = null)
+    {
+        $sum = DB::table($table)->sum($column);
+        return $sum;
+    }
+}
